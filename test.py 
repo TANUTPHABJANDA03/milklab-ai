@@ -1,0 +1,20 @@
+# function to calculate average of a list of numbers
+def average(numbers: list[float | int]) -> float:
+    """Return the arithmetic mean of a list of numbers.
+
+    Args:
+        numbers: A list of numeric values.
+
+    Raises:
+        ValueError: If the input list is empty.
+
+    Returns:
+        The average of the values in the list.
+    """
+    if not numbers:
+        raise ValueError("Cannot compute average of an empty list")
+    return sum(numbers) / len(numbers)
+
+# Example
+nums = [1, 2, 3, 4, 5]
+print(average(nums))  # 3.0 
