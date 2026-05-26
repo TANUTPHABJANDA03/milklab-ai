@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+from datetime import datetime  # เพิ่มการจัดการเวลา
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -50,8 +51,14 @@ def main() -> None:
         print(f"ข้อผิดพลาด: {exc}")
         raise SystemExit(1)
 
+    # 1. คำนวณยอดรวม
     total = quantity * price
-    row = [menu, quantity, price, total]
+    
+    # 2. ดึงวันที่ปัจจุบันในรูปแบบ ปี-เดือน-วัน (เช่น 2026-05-26)
+    today_str = datetime.now().strftime("%Y-%m-%d")
+
+    # 3. จัดข้อมูลลงแถว โดยเอา 'วันที่' ขึ้นเป็นตัวแรกสุดให้ตรงกับคอลัมน์ A ใน Sheet
+    row = [today_str, menu, quantity, price, total]
 
     sheet = get_sheet()
     sheet.append_row(row)
@@ -61,4 +68,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-#Action
